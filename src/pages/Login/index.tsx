@@ -5,6 +5,8 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { withRouter } from 'react-router-dom'
 import { Central } from '../../layouts'
 import { userLogin } from '../../apis'
+import { useDispatch } from 'react-redux'
+import { setUser as setUserAction } from '../../store/actions'
 
 interface LoginInfo {
   name: string
@@ -24,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-export default function Login() {
+function Login() {
   const classes = useStyles()
   const [user, setUser] = useState({
     name: '',
@@ -58,6 +60,8 @@ export default function Login() {
     </Button>
   ))
 
+  const dispatch = useDispatch()
+
   return (
     <Central loading={loading}>
       <TextField
@@ -74,6 +78,17 @@ export default function Login() {
         type="password"
       ></TextField>
       <ToOverview />
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() =>
+          dispatch(setUserAction({ token: `${new Date().getTime()}` }))
+        }
+      >
+        Login user
+      </Button>
     </Central>
   )
 }
+
+export default Login
