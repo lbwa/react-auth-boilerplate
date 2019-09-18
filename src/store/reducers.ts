@@ -1,11 +1,11 @@
 import { combineReducers, Action } from 'redux'
 import { userTypes } from './actions'
 
+type ActionType<T, P = {}> = Action<keyof T> & P
+
 const userInitialState = {
   token: ''
 }
-
-type ActionType<T, P = {}> = Action<keyof T> & P
 
 function user(
   state = userInitialState,
