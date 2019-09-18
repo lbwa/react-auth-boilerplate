@@ -1,4 +1,13 @@
-export function userLogin(username: string, password: string) {
+interface HttpStatus {
+  status: number
+}
+
+type HttpResponse<R = {}> = HttpStatus & R
+
+export function userLogin(
+  username: string,
+  password: string
+): Promise<HttpResponse<{ token: string }>> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (username === 'admin' && password === 'admin')

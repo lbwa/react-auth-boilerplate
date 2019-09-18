@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import Snackbar from '@material-ui/core/Snackbar'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { withRouter } from 'react-router-dom'
 import { Central } from '../../layouts'
@@ -33,6 +34,13 @@ function Login() {
     password: ''
   })
   const [loading, setLoading] = useState(false)
+  const [snackbarState, setSnackbarState] = useState<{
+    open: boolean
+    message: string
+  }>({
+    open: false,
+    message: ''
+  })
   const onChangeEvt = (key: keyof LoginInfo) => (
     evt: ChangeEvent<HTMLInputElement>
   ) =>
@@ -47,13 +55,23 @@ function Login() {
       variant="contained"
       color="primary"
       onClick={() => {
+        if (!user.name || !user.password) return
         setLoading(true)
         userLogin(user.name, user.password)
-          .then(() => {
+          .then(({ token }) => {
             setLoading(false)
-            history.push('/overview')
+            token && dispatch(setUserAction({ token }))
+            history.replace('/overview')
           })
-          .catch(() => setLoading(false))
+          .catch((err: Error) => {
+            console.error(err.message || err)
+            setSnackbarState({
+              ...snackbarState,
+              open: true,
+              message: 'Incorrect username or password'
+            })
+            setLoading(false)
+          })
       }}
     >
       Login
@@ -78,15 +96,22 @@ function Login() {
         type="password"
       ></TextField>
       <ToOverview />
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() =>
-          dispatch(setUserAction({ token: `${new Date().getTime()}` }))
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right'
+        }}
+        open={snackbarState.open}
+        onClose={() =>
+          setSnackbarState({
+            ...snackbarState,
+            message: '',
+            open: false
+          })
         }
-      >
-        Login user
-      </Button>
+        autoHideDuration={5000}
+        message={<div>{snackbarState.message}</div>}
+      />
     </Central>
   )
 }
