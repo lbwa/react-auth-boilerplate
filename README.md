@@ -1,5 +1,11 @@
 <h1 align="center">React auth boilerplate</h1>
 
+<p align="center">
+  <a href="https://github.com/lbwa/react-auth-boilerplate/actions">
+    <img alt="github workflow" src="https://github.com/lbwa/react-auth-boilerplate/workflows/deploy/badge.svg">
+  </a>
+</p>
+
 > This project is used to build a front-end authentication boilerplate.
 
 ## Route-based code splitting
