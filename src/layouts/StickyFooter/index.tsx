@@ -31,7 +31,8 @@ const useStyles = makeStyles(
       footer: {
         padding: '20px 0',
         width: '100%',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: '14px'
       }
     }),
   { name: 'global' }
@@ -63,7 +64,7 @@ export default function StickyFooter({
       <div className={classes.container}>
         <main className={classes.main}>{children}</main>
         <footer className={classes.footer}>
-          &copy; {footerYear}{' '}
+          Copyright &copy; {footerYear}{' '}
           <a href={AUTHOR.github} target="_blank" rel="noopener noreferrer">
             {AUTHOR.name}
           </a>
