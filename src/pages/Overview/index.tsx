@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { History } from 'history'
-import { Central } from '../../layouts'
+import { StickyFooter } from '../../layouts'
 import Button from '@material-ui/core/Button'
 import { delUser } from '../../store/actions'
 
@@ -12,7 +12,7 @@ interface OverviewProps {
 export default function Overview({ history }: OverviewProps) {
   const dispatch = useDispatch()
   return (
-    <Central>
+    <StickyFooter center>
       <p>Overview</p>
       <Button
         variant="contained"
@@ -24,6 +24,6 @@ export default function Overview({ history }: OverviewProps) {
       >
         Logout
       </Button>
-    </Central>
+    </StickyFooter>
   )
 }

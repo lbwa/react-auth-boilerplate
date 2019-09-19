@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Snackbar from '@material-ui/core/Snackbar'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
-import { Central } from '../../layouts'
+import { StickyFooter } from '../../layouts'
 import { userLogin } from '../../apis'
 import { useDispatch } from 'react-redux'
 import { setUser as setUserAction } from '../../store/actions'
@@ -24,6 +24,12 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'fixed',
       top: '0',
       width: '100%'
+    },
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     item: {
       margin: theme.spacing(1)
@@ -95,7 +101,7 @@ function Login({ history }: LoginProps) {
   }
 
   return (
-    <Central loading={loading}>
+    <StickyFooter center loading={loading}>
       <TextField
         className={classes.item}
         value={user.name}
@@ -134,7 +140,7 @@ function Login({ history }: LoginProps) {
         autoHideDuration={5000}
         message={<div>{snackbarState.message}</div>}
       />
-    </Central>
+    </StickyFooter>
   )
 }
 

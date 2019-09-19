@@ -1,1 +1,1 @@
-export { default as Central } from './Central'
+export { default as StickyFooter } from './StickyFooter'
