@@ -1,3 +1,5 @@
+import { UserActionPayload } from '../models'
+
 const types = {
   SET_USER: 'SET_USER',
   DEL_USER: 'DEL_USER'
@@ -5,10 +7,11 @@ const types = {
 
 export default types
 
-export function setUser({ token }: { token: string }) {
+export function setUser({ token, abilities }: Required<UserActionPayload>) {
   return {
     type: types.SET_USER,
-    token
+    token,
+    abilities
   }
 }
 

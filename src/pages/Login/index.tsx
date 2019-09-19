@@ -72,9 +72,9 @@ function Login({ history }: LoginProps) {
     if (!shouldLogin) return
     setLoading(true)
     userLogin(username, password)
-      .then(({ token }) => {
+      .then(({ token, abilities }) => {
         setLoading(false)
-        token && dispatch(setUserAction({ token }))
+        dispatch(setUserAction({ token, abilities }))
         history.replace('/overview')
       })
       .catch((err: Error) => {
