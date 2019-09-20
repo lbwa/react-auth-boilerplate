@@ -52,7 +52,7 @@ export default function StickyFooter({
   const classes = useStyles({ children, loading, center })
   const AUTHOR = {
     name: 'Bowen',
-    github: 'https://gitub.com/lbwa'
+    github: 'https://github.com/lbwa'
   }
   const CREATED_YEAR = 2019
   const nowYear = new Date().getFullYear()
