@@ -14,7 +14,7 @@ export default function App() {
     <Router>
       <Suspense fallback={<Loading />}>
         <Switch>
-          <Auth path="/overview" component={Overview} />
+          <Auth has="mongo.write" path="/overview" component={Overview} />
           <Route exact path="/" component={Login}></Route>
           <Route
             path="/401"

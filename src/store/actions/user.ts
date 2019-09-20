@@ -7,7 +7,10 @@ const types = {
 
 export default types
 
-export function setUser({ token, abilities }: Required<UserActionPayload>) {
+export function setUser({
+  token,
+  abilities
+}: Required<Pick<UserActionPayload, 'token' | 'abilities'>>) {
   return {
     type: types.SET_USER,
     token,

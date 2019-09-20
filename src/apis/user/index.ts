@@ -43,7 +43,7 @@ export function userLogin(
           abilities,
           token: Math.random()
             .toString(16)
-            .slice(2)
+            .slice(2) // JWT simulator or others
         })
 
       return reject({
