@@ -25,3 +25,33 @@
 - [Auth](./src/components/Auth/index.tsx)
 
   A component combined [authorizer](./src/components/Auth/authorizer.ts) with [the route export](https://reacttraining.com/react-router/core/api/Route) of `react-router`.
+
+  ```tsx
+  <Auth has="mongo.write" path="/overview" component={Overview} />
+  ```
+
+## Element-based authorization
+
+- [authorizer](./src/components/Auth/authorizer.ts)
+
+  Define any logics about authorization.
+
+- [Auth](./src/components/Auth/Element/index.tsx)
+
+  Based on [render props][render props].
+
+  ```tsx
+  // The child element only be rendered by access named 'mongo.read'
+  <AuthElement has="mongo.read">
+    {() => (
+      <>
+        Should be shown by{' '}
+        <blockquote>
+          <strong>mongo.read</strong>
+        </blockquote>
+      </>
+    )}
+  </AuthElement>
+  ```
+
+[render props]: https://reactjs.org/docs/render-props.html
