@@ -4,7 +4,9 @@ export type Ability = {
   name: 'read' | 'add' | 'delete' | 'modify'
 }
 
-type AbilitiesMap = Record<Ability['name'], Ability>
+export type AbilityName = Ability['name']
+
+export type AbilitiesMap = Record<Ability['name'], Ability>
 
 export type ActionPayload = Partial<typeof userState>
 
