@@ -6,9 +6,9 @@ export type Ability = {
 
 type AbilitiesMap = Record<Ability['name'], Ability>
 
-export type ActionPayload = Partial<typeof initialState>
+export type ActionPayload = Partial<typeof userState>
 
-export const initialState = {
+export const userState = {
   token: '',
   abilities: [] as Ability[],
   abilitiesMap: {} as AbilitiesMap // also can be WeakMap data type
