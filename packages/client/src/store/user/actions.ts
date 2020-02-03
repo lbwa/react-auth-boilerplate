@@ -10,6 +10,9 @@ export const actionNames = {
  * The following functions are used to create some action to modify redux state.
  *
  * DON'T include any side effect when you create a new function.
+ *
+ * suggest to create a flux standard action
+ * @details https://github.com/redux-utilities/flux-standard-action#flux-standard-action
  */
 
 export function setUser({
@@ -21,8 +24,10 @@ export function setUser({
 }) {
   return {
     type: actionNames.SET_USER,
-    token,
-    abilities
+    payload: {
+      token,
+      abilities
+    }
   }
 }
 
