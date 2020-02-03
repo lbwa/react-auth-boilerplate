@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
-import './index.css'
+import './index.sass'
 import App from './views'
 import store from './store'
 // import * as serviceWorker from './serviceWorker'
