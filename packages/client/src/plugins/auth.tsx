@@ -1,12 +1,12 @@
 import React from 'react'
 import { Route, Redirect, RouteProps } from 'react-router-dom'
 
-import { AbilitiesMap, AbilityName } from '../store/user/model'
+import { Ability, AbilitiesMap, AbilityName } from '../store/user/model'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../store'
 import { isDef } from '../shared/utils'
 
-interface BaseAuthProps {
+interface BaseAuthRouteProps {
   component: (...props: any[]) => JSX.Element | null
   redirect?: string
   has?: AbilityName
@@ -14,7 +14,20 @@ interface BaseAuthProps {
   weak?: AbilityName[]
 }
 
-type AuthProps = BaseAuthProps & Omit<RouteProps, 'render'>
+type AuthRouteProps = BaseAuthRouteProps & Omit<RouteProps, 'render'>
+type AuthElementProps = Omit<BaseAuthRouteProps, 'component' | 'redirect'> &
+  Record<'children', (...props: any[]) => JSX.Element | null>
+
+export function serializeAbilities(abilitiesList: Ability[]) {
+  return abilitiesList.reduce((map, ability) => {
+    if (isDef(map[ability.name])) {
+      map[ability.name] = ability
+    } else {
+      console.warn(`[AB]: Duplicate user ability named ${ability.name}.`)
+    }
+    return map
+  }, {} as AbilitiesMap)
+}
 
 function verifyStrongOrWeak(
   pendingList: AbilityName[] | undefined,
@@ -29,7 +42,7 @@ function verifyStrongOrWeak(
 
 function authorizer(
   abilitiesMap: AbilitiesMap,
-  { has, strong, weak }: Pick<BaseAuthProps, 'has' | 'strong' | 'weak'>
+  { has, strong, weak }: Pick<BaseAuthRouteProps, 'has' | 'strong' | 'weak'>
 ) {
   if (isDef(has)) return Boolean(abilitiesMap[has])
 
@@ -48,7 +61,7 @@ export function AuthRoute({
   strong,
   weak,
   ...routeProps
-}: AuthProps) {
+}: AuthRouteProps) {
   const hasAuthorized = useSelector<StoreType, boolean>(({ user }) =>
     authorizer(user.abilitiesMap, {
       has,
@@ -75,4 +88,16 @@ export function AuthRoute({
       }
     />
   )
+}
+
+export function AuthElement({
+  children: Component,
+  has,
+  strong,
+  weak
+}: AuthElementProps) {
+  const hasAuthorized = useSelector<StoreType, boolean>(({ user }) =>
+    authorizer(user.abilitiesMap, { has, strong, weak })
+  )
+  return hasAuthorized ? <Component /> : null
 }
