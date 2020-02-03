@@ -16,33 +16,37 @@ interface BaseAuthProps {
 
 type AuthProps = BaseAuthProps & Omit<RouteProps, 'render'>
 
+function verifyStrongOrWeak(
+  pendingList: AbilityName[] | undefined,
+  map: AbilitiesMap,
+  type: 'every' | 'some'
+) {
+  if (Array.isArray(pendingList) && pendingList.length) {
+    return pendingList[type](name => map[name])
+  }
+  return false
+}
+
 function authorizer(
   abilitiesMap: AbilitiesMap,
-  {
-    has,
-    strong = [],
-    weak = []
-  }: Pick<BaseAuthProps, 'has' | 'strong' | 'weak'>
+  { has, strong, weak }: Pick<BaseAuthProps, 'has' | 'strong' | 'weak'>
 ) {
-  if (isDef(has)) return Boolean(abilitiesMap[has!])
+  if (isDef(has)) return Boolean(abilitiesMap[has])
 
-  if (Array.isArray(strong) && strong.length) {
-    return strong.every(name => abilitiesMap[name])
-  }
-
-  if (Array.isArray(weak) && weak.length) {
-    return weak.some(name => abilitiesMap[name])
-  }
-
-  return false
+  const isStrong = Array.isArray(strong)
+  return verifyStrongOrWeak(
+    isStrong ? strong : weak,
+    abilitiesMap,
+    isStrong ? 'every' : 'some'
+  )
 }
 
 export function AuthRoute({
   component: Component,
   redirect = '/401',
   has,
-  strong = [],
-  weak = [],
+  strong,
+  weak,
   ...routeProps
 }: AuthProps) {
   const hasAuthorized = useSelector<StoreType, boolean>(({ user }) =>
