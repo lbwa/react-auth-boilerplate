@@ -1,44 +1,35 @@
 {
   "name": "react-auth-boilerplate",
   "version": "0.1.0",
+  "description": "Auth boilerplate",
+  "main": "index.js",
   "private": true,
-  "dependencies": {
-    "@material-ui/core": "^4.4.1",
-    "@types/jest": "24.0.18",
-    "@types/node": "12.7.4",
-    "@types/react": "16.9.2",
-    "@types/react-dom": "16.9.0",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-redux": "^7.1.1",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "3.1.2",
-    "typescript": "3.6.2"
-  },
-  "devDependencies": {
-    "@types/react-redux": "^7.1.2",
-    "@types/react-router-dom": "^4.3.5"
-  },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "init": "npx lerna init",
+    "test": "echo \"no test\" && exit 1"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lbwa/react-auth-boilerplate.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "keywords": [
+    "auth",
+    "boilerplate",
+    "react",
+    "react-redux",
+    "react-router"
+  ],
+  "author": "Bowen <vnode@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lbwa/react-auth-boilerplate/issues"
+  },
+  "homepage": "https://github.com/lbwa/react-auth-boilerplate#readme",
+  "devDependencies": {
+    "lerna": "^3.20.2"
   },
   "prettier": {
     "semi": false,
@@ -46,6 +37,5 @@
     "printWidth": 80,
     "singleQuote": true,
     "trailingComma": "none"
-  },
-  "homepage": "https://lbwa.github.io/react-auth-boilerplate"
+  }
 }
