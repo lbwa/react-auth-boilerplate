@@ -1,14 +1,14 @@
 import React from 'react'
 import { Route, Redirect, RouteProps } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import { Ability, AbilitiesMap, AbilityName } from '../store/user/model'
-import { useSelector } from 'react-redux'
 import { StoreType } from '../store'
 import { isDef } from '../shared/utils'
 import { forbiddenRoute } from '../shared/env'
 
 interface BaseAuthRouteProps {
-  component: (...props: any[]) => JSX.Element | null
+  component: React.ComponentType<any>
   redirect?: string
   has?: AbilityName
   strong?: AbilityName[]
@@ -17,7 +17,7 @@ interface BaseAuthRouteProps {
 
 type AuthRouteProps = BaseAuthRouteProps & Omit<RouteProps, 'render'>
 type AuthElementProps = Omit<BaseAuthRouteProps, 'component' | 'redirect'> &
-  Record<'children', (...props: any[]) => JSX.Element | null>
+  Record<'children', React.ComponentType<any>>
 
 export function serializeAbilities(abilitiesList: Ability[]) {
   return abilitiesList.reduce((map, ability) => {
