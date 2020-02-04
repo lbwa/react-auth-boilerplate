@@ -4,6 +4,7 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import { AuthRoute } from '../plugins/auth'
 import BaseLoading from '../components/BaseLoading'
 import { forbiddenRoute, forbiddenCode, forbiddenMessage } from '../shared/env'
+import { withProgress } from '../plugins/progress'
 
 const Home = lazy(() => import(/* webpackChunkName: 'home' */ './Home'))
 const User = lazy(() => import(/* webpackChunkName: 'user' */ './User'))
@@ -14,8 +15,8 @@ function App() {
     <Router>
       <Suspense fallback={<BaseLoading />}>
         <Switch>
-          <AuthRoute has={'add'} path="/user" component={User} />
-          <Route exact path="/" component={Home} />
+          <AuthRoute path="/user" component={withProgress(User)} />
+          <Route exact path="/" component={withProgress(Home)} />
 
           {/* The following handlers are error handlers. */}
           <Route
