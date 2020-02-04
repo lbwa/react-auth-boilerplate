@@ -1,44 +1,60 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">React auth boilerplate</h1>
 
-## Available Scripts
+<p align="center">
+  <a href="https://github.com/lbwa/react-auth-boilerplate/actions">
+    <img alt="github workflow" src="https://github.com/lbwa/react-auth-boilerplate/workflows/deploy/badge.svg">
+  </a>
+  <img alt="lerna" src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg"/>
+</p>
 
-In the project directory, you can run:
+> This project is used to build a front-end authentication boilerplate.
 
-### `yarn start`
+## Route-based code splitting
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Official route-based code splitting guide](https://reactjs.org/docs/code-splitting.html#route-based-code-splitting)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  > This approach only works with a browser environment<sup>[DOC](https://reactjs.org/docs/react-api.html#reactsuspense)</sup>, not SSR.
+  >
+  > SSR approach can be found from [here](https://reacttraining.com/react-router/web/guides/code-splitting), because [loadable-components](https://www.smooth-code.com/open-source/loadable-components/docs/loadable-vs-react-lazy/#comparison-table) has supported SSR environment.
 
-### `yarn test`
+## Route-based authorization
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [authorizer][authorizer]
 
-### `yarn build`
+  Define any logics about authorization.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[authorizer]: ./src/plugins/auth.tsx#L44-L56
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- [AuthRoute](./src/plugins/auth.tsx#L58-L92)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  A component combined `authorizer` with [the route export](https://reacttraining.com/react-router/core/api/Route) of `react-router`.
 
-### `yarn eject`
+  ```tsx
+  <AuthRoute has="mongo.write" path="/overview" component={Overview} />
+  ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Element-based authorization
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [authorizer][authorizer]
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  Define any logics about authorization.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [AuthElement](./src/plugins/auth.tsx#L94-L104)
 
-## Learn More
+  Based on [render props][render props].
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  ```tsx
+  // The child element only be rendered by access named 'mongo.read'
+  <AuthElement has="mongo.read">
+    Should be shown by{' '}
+    <blockquote>
+      <strong>mongo.read</strong>
+    </blockquote>
+  </AuthElement>
+  ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[render props]: https://reactjs.org/docs/render-props.html
+
+## License
+
+MIT © [Bowen Liu](https://github.com/lbwa)

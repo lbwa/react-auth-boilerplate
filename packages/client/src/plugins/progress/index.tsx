@@ -14,7 +14,7 @@ NProgress.configure({ showSpinner: false })
 export function withProgress(Component: React.ComponentType<any>) {
   return class Progress extends React.Component {
     componentDidMount() {
-      // NProgress.done(true)
+      NProgress.done(true)
     }
 
     componentWillUnmount() {
