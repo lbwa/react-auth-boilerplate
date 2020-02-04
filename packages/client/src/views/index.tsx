@@ -3,11 +3,21 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 
 import { AuthRoute } from '../plugins/auth'
 import BaseLoading from '../components/BaseLoading'
-import { forbiddenRoute, forbiddenCode, forbiddenMessage } from '../shared/env'
+import {
+  forbiddenRoute,
+  forbiddenCode,
+  forbiddenMessage,
+  notFoundCode,
+  notFoundMessage
+} from '../shared/env'
 import { withProgress } from '../plugins/progress'
 
-const Home = lazy(() => import(/* webpackChunkName: 'home' */ './Home'))
-const User = lazy(() => import(/* webpackChunkName: 'user' */ './User'))
+const Home = withProgress(
+  lazy(() => import(/* webpackChunkName: 'home' */ './Home'))
+)
+const User = withProgress(
+  lazy(() => import(/* webpackChunkName: 'user' */ './User'))
+)
 const Err = lazy(() => import(/* webpackChunkName: 'err' */ './Error'))
 
 function App() {
@@ -15,20 +25,20 @@ function App() {
     <Router>
       <Suspense fallback={<BaseLoading />}>
         <Switch>
-          <AuthRoute path="/user" component={withProgress(User)} />
-          <Route exact path="/" component={withProgress(Home)} />
+          <AuthRoute path="/user" component={User} />
+          <Route exact path="/" component={Home} />
 
           {/* The following handlers are error handlers. */}
           <Route
             path={forbiddenRoute}
-            render={() => (
+            component={withProgress(() => (
               <Err code={forbiddenCode} message={forbiddenMessage} />
-            )}
+            ))}
           />
           <Route
-            render={() => (
-              <Err code="404" message="Seems nothing could be found." />
-            )}
+            component={withProgress(() => (
+              <Err code={notFoundCode} message={notFoundMessage} />
+            ))}
           />
         </Switch>
       </Suspense>
