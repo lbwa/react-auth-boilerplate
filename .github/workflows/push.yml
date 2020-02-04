@@ -30,7 +30,7 @@ jobs:
       - name: Build
         # All dependencies installed by lerna
         run: |
-          yarn bootstrap 
+          yarn bootstrap --registry https://registry.npmjs.org/
           yarn build:client
 
       - name: deployment
