@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "init": "npx lerna init",
+    "start:client": "cd packages/client && npm run start",
     "test": "echo \"no test\" && exit 1"
   },
   "repository": {
