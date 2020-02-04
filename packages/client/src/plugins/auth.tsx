@@ -5,6 +5,7 @@ import { Ability, AbilitiesMap, AbilityName } from '../store/user/model'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../store'
 import { isDef } from '../shared/utils'
+import { forbiddenRoute } from '../shared/env'
 
 interface BaseAuthRouteProps {
   component: (...props: any[]) => JSX.Element | null
@@ -56,7 +57,7 @@ function authorizer(
 
 export function AuthRoute({
   component: Component,
-  redirect = '/401',
+  redirect = forbiddenRoute,
   has,
   strong,
   weak,
