@@ -1,19 +1,13 @@
 import { userState, ActionPayload } from './model'
-import { ActionType } from '../../typings/store'
+import { IAction } from '../../typings/store'
 import { actionNames } from './actions'
 
-function reducer(
-  state = userState,
-  action: ActionType<typeof actionNames, ActionPayload>
-) {
+function reducer(state = userState, action: IAction<ActionPayload>) {
   switch (action.type) {
     case actionNames.SET_USER:
       return {
         ...state,
-        ...{
-          token: action.token,
-          abilities: action.abilities || []
-        }
+        ...action.payload
       }
 
     case actionNames.DEL_USER:
