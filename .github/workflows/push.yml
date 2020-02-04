@@ -30,7 +30,7 @@ jobs:
       - name: Build
         # All dependencies installed by lerna
         run: |
-          yarn init 
+          yarn bootstrap 
           yarn build:client
 
       - name: deployment
