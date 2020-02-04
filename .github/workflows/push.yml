@@ -22,15 +22,21 @@ jobs:
         with:
           version: ${{ matrix.node_version }}
 
-      - name: Build
+      - name: Use Yarn
         run: |
-          npm i
-          npm run build
+          npm i yarn -g
+          yarn -v
+
+      - name: Build
+        # All dependencies installed by lerna
+        run: |
+          yarn init 
+          yarn build:client
 
       - name: deployment
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BUILD_DIR: build
+          BUILD_DIR: packages/client/build
           TARGET_BRANCH: gh-pages
         run: |
           REMOTE_ORIGIN=https://${ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}
