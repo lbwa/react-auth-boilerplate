@@ -3,6 +3,7 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 
 import { AuthRoute } from '../plugins/auth'
 import BaseLoading from '../components/BaseLoading'
+import { forbiddenRoute, forbiddenCode, forbiddenMessage } from '../shared/env'
 
 const Home = lazy(() => import(/* webpackChunkName: 'home' */ './Home'))
 const User = lazy(() => import(/* webpackChunkName: 'user' */ './User'))
@@ -16,8 +17,10 @@ function App() {
           <AuthRoute has={'add'} path="/user" component={User} />
           <Route exact path="/" component={Home} />
           <Route
-            path="/401"
-            render={() => <Err code="401" message="Unauthorized access" />}
+            path={forbiddenRoute}
+            render={() => (
+              <Err code={forbiddenCode} message={forbiddenMessage} />
+            )}
           />
           <Route
             path="/404"
