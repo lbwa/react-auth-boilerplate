@@ -10,6 +10,7 @@
   "scripts": {
     "init": "npx lerna init",
     "start:client": "cd packages/client && npm run start",
+    "build:client": "cd packages/client && npm run build",
     "test": "echo \"no test\" && exit 1"
   },
   "repository": {
