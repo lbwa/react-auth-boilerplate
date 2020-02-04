@@ -16,6 +16,8 @@ function App() {
         <Switch>
           <AuthRoute has={'add'} path="/user" component={User} />
           <Route exact path="/" component={Home} />
+
+          {/* The following handlers are error handlers. */}
           <Route
             path={forbiddenRoute}
             render={() => (
@@ -23,7 +25,6 @@ function App() {
             )}
           />
           <Route
-            path="/404"
             render={() => (
               <Err code="404" message="Seems nothing could be found." />
             )}
