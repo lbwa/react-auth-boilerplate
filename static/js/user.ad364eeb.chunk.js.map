@@ -1,0 +1,1 @@
+{"version":3,"sources":["views/User/index.tsx"],"names":["User"],"mappings":"iGAAA,mEAEe,SAASA,IACtB,OAAO","file":"static/js/user.ad364eeb.chunk.js","sourcesContent":["import React from 'react'\n\nexport default function User() {\n  return <div>user page</div>\n}\n"],"sourceRoot":""}

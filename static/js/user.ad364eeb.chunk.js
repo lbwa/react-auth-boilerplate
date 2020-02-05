@@ -1,0 +1,2 @@
+(this.webpackJsonpclient=this.webpackJsonpclient||[]).push([[4],{50:function(n,e,t){"use strict";t.r(e),t.d(e,"default",(function(){return i}));var u=t(0),c=t.n(u);function i(){return c.a.createElement("div",null,"user page")}}}]);
+//# sourceMappingURL=user.ad364eeb.chunk.js.map

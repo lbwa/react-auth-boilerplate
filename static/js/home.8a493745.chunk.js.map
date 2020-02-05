@@ -1,0 +1,1 @@
+{"version":3,"sources":["views/Home/index.tsx"],"names":["Home"],"mappings":"iGAAA,2BAMeA,UAJf,WACE,OAAO","file":"static/js/home.8a493745.chunk.js","sourcesContent":["import React from 'react'\n\nfunction Home() {\n  return <div>Home</div>\n}\n\nexport default Home\n"],"sourceRoot":""}
