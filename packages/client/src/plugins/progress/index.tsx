@@ -11,8 +11,8 @@ NProgress.configure({ showSpinner: false })
  * https://github.com/ReactTraining/react-router/blob/master/packages/react-router/modules/Prompt.js
  * https://github.com/ReactTraining/react-router/blob/master/packages/react-router/modules/Lifecycle.js
  */
-export function withProgress(Component: React.ComponentType<any>) {
-  return class Progress extends React.Component {
+export function withProgress<P = any>(Component: React.ComponentType<P>) {
+  return class Progress extends React.Component<P> {
     componentDidMount() {
       NProgress.done(true)
     }
